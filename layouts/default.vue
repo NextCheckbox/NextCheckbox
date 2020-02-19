@@ -7,7 +7,7 @@
     >
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <img src="~assets/favicon.png" alt="Buefy" height="28" />
+          <img src="~assets/favicon-128.png" alt="Buefy" height="28" />
           <strong class="m-l-sm">NextCheckbox</strong>
         </a>
 
