@@ -13,11 +13,11 @@ div
   section.main-content.columns
     aside.column.is-2.section
       p.menu-label.is-hidden-touch
-        | General
+        | Navigation
       ul.menu-list
         li(v-for='(item, key) of items' :key='key')
           nuxt-link(:to='item.to' exact-active-class='is-active')
-            b-icon(:icon='item.icon')
+            b-icon.m-r-sm(:icon='item.icon')
             | {{ item.title }}
     .container.column.is-10
       nuxt

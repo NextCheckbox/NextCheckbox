@@ -1,23 +1,19 @@
 <template lang="pug">
-section.section
-  .columns.is-mobile
-    card(title='Free' icon='github-circle')
-      | Open source on
-      a(href='https://github.com/buefy/buefy')
-        | GitHub
-    card(title='Responsive' icon='cellphone-link')
-      b.has-text-grey
-        | Every
-      |         component is responsive
-    card(title='Modern' icon='alert-decagram')
-      | Built with
-      a(href='https://vuejs.org/')
-        | Vue.js
-      |         and
-      a(href='http://bulma.io/')
-        | Bulma
-    card(title='Lightweight' icon='arrange-bring-to-front')
-      | No other internal dependency
+div
+  section.section
+    h1.title.is-1 NextCheckbox
+    p.subtitle An easy to use directory of services, resources, and guides for those in need in for Portland, OR
+
+  section.section
+    .columns.is-multiline
+      card.is-half-tablet.is-one-quarter-desktop(title='Community Resources' icon='store')
+        | coming soon
+      card.is-half-tablet.is-one-quarter-desktop(title='Programs and Events' icon='calendar')
+        | coming soon
+      card.is-half-tablet.is-one-quarter-desktop(title='Guides' icon='clipboard-check')
+        | coming soon
+      card.is-half-tablet.is-one-quarter-desktop(title='News & Views' icon='newspaper')
+        | coming soon
 </template>
 
 <script>
