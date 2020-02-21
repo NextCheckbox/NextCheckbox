@@ -11,15 +11,15 @@ div
             span
 
   section.main-content.columns
-    aside.column.is-2.section
-      p.menu-label.is-hidden-touch
+    aside.column.is-one-quarter-tablet.is-one-fifth-desktop.section.is-hidden-mobile
+      p.menu-label
         | Navigation
       ul.menu-list
         li(v-for='(item, key) of items' :key='key')
           nuxt-link(:to='item.to' exact-active-class='is-active')
             b-icon.m-r-sm(:icon='item.icon')
             | {{ item.title }}
-    .container.column.is-10
+    .container.column.is-three-quarters-tablet.is-four-fifths-desktop
       nuxt
 </template>
 

@@ -1,7 +1,8 @@
 <template lang="pug">
 div
   section.section
-    h1.title.is-1 NextCheckbox
+    h1.title.is-1.is-hidden-mobile NextCheckbox
+    h1.title.is-2.is-hidden-tablet NextCheckbox
     p.subtitle An easy to use directory of services, resources, and guides for those in need in for Portland, OR
 
   section.section
