@@ -3,15 +3,23 @@
     header.card-header
       .card-header-title {{ resource.title }}
     .card-content
-      .content {{ resource.content }}
+      .content(v-html='markedContent')
 </template>
 
 <script>
+import * as marked from 'marked'
+
 export default {
   props: {
     resource: {
       type: Object,
       default: () => ({})
+    }
+  },
+
+  computed: {
+    markedContent() {
+      return marked(this.resource.content)
     }
   }
 }
