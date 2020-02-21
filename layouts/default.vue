@@ -34,9 +34,9 @@ export default {
           to: { name: 'index' }
         },
         {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' }
+          title: 'Resources',
+          icon: 'store',
+          to: { name: 'resources' }
         }
       ]
     }
