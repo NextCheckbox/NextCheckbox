@@ -3,7 +3,9 @@
     header.card-header
       .card-header-title {{ resource.title }}
     .card-content
-      .card.m-b-lg
+      .content(v-html='markedContent')
+
+      .card
         .card-content
           div(v-if='resource.requiresReferral')
             strong 🚨 Requires referral
@@ -26,19 +28,16 @@
           hr
           div.categories-list.d-print-none
             strong.m-r-sm Categories:
-            router-link.m-r-sm(v-for='(category, key) in resource.categories' :key='key' :to='{name: "ServicesListing", query: {category}}')
-              img.mr-1(:src='"/img/map-icons/" + category + ".png"' style='vertical-align: middle')
+            NuxtLink.m-r-sm(v-for='(category, key) in resource.categories' :key='key' :to='{name: "resources", query: {category}}')
+              img.m-r-sm(:src='"/img/map-icons/" + category + ".png"' style='vertical-align: middle')
               span {{category}}
             div(v-if='resource.tags && resource.tags.length')
               hr
               div
                 strong.m-r-sm Tags:
-                router-link.m-r-sm(v-for='(tag, key) in resource.tags' :key='key' :to='{name: "ServicesListing", query: {tag}}')
+                NuxtLink.m-r-sm(v-for='(tag, key) in resource.tags' :key='key' :to='{name: "resources", query: {tag}}')
                   span {{tag}}
                   span(v-if='key < resource.tags.length - 1') ,
-
-
-      .content(v-html='markedContent')
 </template>
 
 <script>
