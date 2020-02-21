@@ -10,12 +10,7 @@
 import * as marked from 'marked'
 
 export default {
-  props: {
-    resource: {
-      type: Object,
-      default: () => ({})
-    }
-  },
+  props: ['resource'],
 
   computed: {
     markedContent() {
