@@ -9,14 +9,14 @@
         .card-content
           div(v-if='resource.requiresReferral')
             strong 🚨 Requires referral
-          hr(v-if='resource.requiresReferral')
+          hr.m-t-xs.m-b-sm(v-if='resource.requiresReferral')
           div(v-if="resource.websiteUrl")
             strong.m-r-sm Website:
             a(:href="resource.websiteUrl") {{resource.websiteUrl}}
           div(v-if="resource.twitter")
             strong.m-r-sm Twitter:
             a(:href="'https://twitter.com/' + resource.twitter") @{{resource.twitter}}
-          hr(v-if='resource.twitter || resource.website')
+          hr.m-t-xs.m-b-sm(v-if='resource.twitter || resource.website')
           div(v-if="resource.address")
             strong.m-r-sm Address:
             a(:href="'https://maps.google.com/?q=' + resource.address") {{resource.address}}
@@ -25,7 +25,7 @@
             span {{resource.addressDetails}}
           div(v-if="resource.phone")
             strong Phone: {{resource.phone}}
-          hr
+          hr.m-t-xs.m-b-sm
           div.categories-list.d-print-none
             strong.m-r-sm Categories:
             NuxtLink.m-r-sm(v-for='(category, key) in resource.categories' :key='key' :to='{name: "resources", query: {category}}')
