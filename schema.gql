@@ -1,0 +1,28 @@
+type Resource {
+  address: String
+  addressDetails: String
+  categories: [String]
+  content: String!
+  coverImageUrl: String
+  hideCoverImage: Boolean
+  hours: String
+  id: ID
+  isDeleted: Boolean
+  latitude: Number
+  longitude: Number
+  phone: String
+  placeId: String
+  pov: {
+    heading: Number
+    pitch: Number
+    zoom: Number
+  }
+  povLatitude: Number
+  povLongitude: Number
+  requiresReferral: Boolean
+  tags: [String!]
+  title: String!
+  transit: String
+  twitter: String
+  websiteUrl: String
+}
