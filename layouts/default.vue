@@ -5,14 +5,14 @@ div
       a.navbar-item(href='/')
         img(src='~assets/favicon-128.png' alt='Buefy' height='28')
         strong.m-l-sm NextCheckbox
-      .navbar-burger
+      .navbar-burger(@click='isNavOpen = !isNavOpen')
         span
-          span
-            span
+        span
+        span
 
   section.main-content.columns
-    aside.column.is-one-quarter-tablet.is-one-fifth-desktop.section.is-hidden-mobile
-      p.menu-label
+    aside.column.is-one-quarter-tablet.is-one-fifth-desktop.section(:class='{"is-hidden-mobile": !isNavOpen, "has-shadow": isNavOpen}')
+      p.menu-label.is-hidden-mobile
         | Navigation
       ul.menu-list
         li(v-for='(item, key) of items' :key='key')
@@ -27,6 +27,8 @@ div
 export default {
   data() {
     return {
+      isNavOpen: false,
+
       items: [
         {
           title: 'Home',
@@ -40,6 +42,19 @@ export default {
         }
       ]
     }
+  },
+
+  methods: {
+    test () {
+      this.isNavOpen = !this.isNavOpen
+      console.log('test')
+    }
   }
 }
 </script>
+
+<style lang="scss">
+aside.sidebar-visible {
+  display: block !important;
+}
+</style>
