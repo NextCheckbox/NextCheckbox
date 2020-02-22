@@ -32,7 +32,7 @@
               img.m-r-sm(:src='"/img/map-icons/" + category + ".png"' style='vertical-align: middle')
               span {{category}}
             div(v-if='resource.tags && resource.tags.length')
-              hr
+              hr.m-t-xs.m-b-sm
               div
                 strong.m-r-sm Tags:
                 NuxtLink.m-r-sm(v-for='(tag, key) in resource.tags' :key='key' :to='{name: "resources", query: {tag}}')
