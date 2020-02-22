@@ -10,17 +10,15 @@ type Resource {
   hideCoverImage: Boolean
   hours: String
   isDeleted: Boolean
-  latitude: Number
-  longitude: Number
+  latitude: Float
+  longitude: Float
   phone: String
   placeId: String
-  pov: {
-    heading: Number
-    pitch: Number
-    zoom: Number
-  }
-  povLatitude: Number
-  povLongitude: Number
+  povHeading: Float
+  povPitch: Float
+  povZoom: Float
+  povLatitude: Float
+  povLongitude: Float
   requiresReferral: Boolean
   tags: [String!]
   title: String!
@@ -35,6 +33,7 @@ type User {
   resources: [Resource]
   posts: [Post]
 }
+input UserInput {name: String!}
 
 type Post {
   id: ID
@@ -46,42 +45,7 @@ type Post {
 }
 
 type Query {
-  allResources(last: Int): [Resource!]!
-  allUsers(last: Int): [User!]!
-  allPosts(last: Int): [Post!]!
-}
-
-type Mutation {
-  createUser(name: String!)
-
-  createPost(author: User!, title: String!, published: String!, content: String!)
-
-  createResource(
-    author: User!,
-    address: String,
-    addressDetails: String,
-    categories: [String],
-    content: String!,
-    coverImageUrl: String,
-    hideCoverImage: Boolean,
-    hours: String,
-    isDeleted: Boolean,
-    latitude: Number,
-    longitude: Number,
-    phone: String,
-    placeId: String,
-    pov: {
-      heading: Number,
-      pitch: Number,
-      zoom: Number
-    },
-    povLatitude: Number,
-    povLongitude: Number,
-    requiresReferral: Boolean,
-    tags: [String!],
-    title: String!,
-    transit: String,
-    twitter: String,
-    websiteUrl: String,
-  )
+  allResources: [Resource]
+  allUsers: [User]
+  allPosts: [Post]
 }

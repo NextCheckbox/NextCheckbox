@@ -8,7 +8,7 @@
       .columns.is-multiline
         .column.is-half-tablet
           h2.title Import Resources
-          p Imports data in the form
+          p Imports data in the form:
           pre.m-b-md.m-t-md
             code.
               {

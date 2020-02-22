@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "faunadb": "^2.11.1",
     "marked": "^0.8.0",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.3.2",
