@@ -37,7 +37,7 @@ export default {
     /**
      * Imports resources from a JSON in the form: {resource: {id1: {}, id2: {}}}
      */
-    importResources () {
+    importResources() {
       this.isImportingResources = true
       let json = {}
 
@@ -66,30 +66,31 @@ export default {
       let numWaiting = keys.length
       let data = {}
 
-      keys.forEach(key => {
+      keys.forEach((key) => {
         let resource = json.Resource[key]
+        let port = process.env.NODE_ENV === 'production' ? '' : ':9000'
 
-        fetch(location.protocol + '//' + location.hostname + ':9000' + '/.netlify/functions/createResource', {
+        fetch(location.protocol + '//' + location.hostname + port + '/.netlify/functions/createResource', {
           body: JSON.stringify(json.Resource[key]),
           method: 'POST'
         })
-        .catch(err => {
-          this.$buefy.toast.open({
-            type: 'is-danger',
-            message: err.toString()
-          })
-        })
-        .finally(() => {
-          --numWaiting
-          this.progress = (1 - (numWaiting / keys.length)) * 100
-          if (!numWaiting) {
-            this.isImportingResources = false
+          .catch((err) => {
             this.$buefy.toast.open({
-              type: 'is-success',
-              message: 'Import complete'
+              type: 'is-danger',
+              message: err.toString()
             })
-          }
-        })
+          })
+          .finally(() => {
+            --numWaiting
+            this.progress = (1 - numWaiting / keys.length) * 100
+            if (!numWaiting) {
+              this.isImportingResources = false
+              this.$buefy.toast.open({
+                type: 'is-success',
+                message: 'Import complete'
+              })
+            }
+          })
       })
     }
   }
