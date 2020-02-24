@@ -17,25 +17,36 @@ exports.handler = async (event, context, callback) => {
     data: data
   }
 
+  let method
   return client
-    .query(q.Create(q.Ref(q.Collection('Resource'), data.id), resource))
-    .then((response) => {
-      console.log(chalk.green('Resource created'), response.data._id)
-      return {
-        statusCode: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify(response)
-      }
+    .query(q.Get(q.Ref(q.Collection('Resource'), data.id)))
+    .then(() => {
+      method = 'Update'
     })
-    .catch((err) => {
-      console.log(
-        chalk.red('Error creating resource:', err, JSON.stringify(resource))
-      )
-      return {
-        statusCode: 400,
-        body: JSON.stringify(err)
-      }
+    .catch(() => {
+      method = 'Create'
+    })
+    .then(() => {
+      return client
+        .query(q[method](q.Ref(q.Collection('Resource'), data.id), resource))
+        .then((response) => {
+          console.log(chalk.green(`Resource ${method}d`), response.data.id)
+          return {
+            statusCode: 200,
+            headers: {
+              'Access-Control-Allow-Origin': '*'
+            },
+            body: JSON.stringify(response)
+          }
+        })
+        .catch((err) => {
+          console.log(
+            chalk.red('Error creating resource:', err, JSON.stringify(resource))
+          )
+          return {
+            statusCode: 400,
+            body: JSON.stringify(err)
+          }
+        })
     })
 }
