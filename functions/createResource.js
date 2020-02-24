@@ -17,22 +17,25 @@ exports.handler = async (event, context, callback) => {
     data: data
   }
 
-  console.log('Creating Resource', data)
-  return client.query(q.Create(q.Collection('Resource'), resource))
+  return client
+    .query(q.Create(q.Ref(q.Collection('Resource'), data.id), resource))
     .then((response) => {
       console.log(chalk.green('Resource created'), response.data._id)
       return {
         statusCode: 200,
         headers: {
-          "Access-Control-Allow-Origin" : "*"
+          'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(response)
       }
-    }).catch((err) => {
-      console.log(chalk.red('Error creating resource:', err))
+    })
+    .catch((err) => {
+      console.log(
+        chalk.red('Error creating resource:', err, JSON.stringify(resource))
+      )
       return {
         statusCode: 400,
-        body: JSON.stringify(error)
+        body: JSON.stringify(err)
       }
     })
 }

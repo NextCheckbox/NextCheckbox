@@ -7,9 +7,17 @@ let client
 
 // Check for secret
 if (!process.env.FAUNADB_SECRET) {
-  console.log(chalk.yellow('Required FAUNADB_SERVER_SECRET enviroment variable not found.'))
-  console.log(`Make sure you have created your Fauna databse with "netlify addons:create fauna"`)
-  console.log(`Then run "npm run functions:bootstrap" to setup your database schema`)
+  console.log(
+    chalk.yellow(
+      'Required FAUNADB_SERVER_SECRET enviroment variable not found.'
+    )
+  )
+  console.log(
+    `Make sure you have created your Fauna databse with "netlify addons:create fauna"`
+  )
+  console.log(
+    `Then run "npm run functions:bootstrap" to setup your database schema`
+  )
   if (insideNetlify) {
     process.exit(1)
   }
@@ -26,23 +34,28 @@ function createFaunaDB(key) {
   })
 
   console.log(chalk.cyan('Creating "Resource" collection'))
-  return client.query(q.CreateCollection({ name: 'Resource' })).then(() => {
-    // Create Index
-    return createIndexes()
-  }).catch((e) => {
-    console.log(chalk.red(e))
-    createIndexes()
-  })
+  return client
+    .query(q.CreateCollection({ name: 'Resource' }))
+    .then(() => {
+      // Create Index
+      return createIndexes()
+    })
+    .catch((e) => {
+      console.log(chalk.red(e))
+      createIndexes()
+    })
 }
 
-function createIndexes () {
+function createIndexes() {
   console.log(chalk.cyan('Creating "allResources" index'))
-  return client.query(
-    q.CreateIndex({
-      name: 'allResources',
-      source: q.Collection('Resource'),
-      terms: [{field: ['data']}]
-    })).catch((e) => {
+  return client
+    .query(
+      q.CreateIndex({
+        name: 'allResources',
+        source: q.Collection('Resource')
+      })
+    )
+    .catch((e) => {
       console.log(chalk.red(e))
     })
 }
@@ -50,7 +63,7 @@ function createIndexes () {
 /**
  * Checks if we're inside netlify
  */
-function insideNetlifyBuildContext () {
+function insideNetlifyBuildContext() {
   if (process.env.DEPLOY_PRIME_URL) {
     return true
   }
