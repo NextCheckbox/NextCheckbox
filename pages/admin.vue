@@ -73,11 +73,21 @@ export default {
           body: JSON.stringify(json.Resource[key]),
           method: 'POST'
         })
+        .catch(err => {
+          this.$buefy.toast.open({
+            type: 'is-danger',
+            message: err.toString()
+          })
+        })
         .finally(() => {
           --numWaiting
           this.progress = (1 - (numWaiting / keys.length)) * 100
           if (!numWaiting) {
             this.isImportingResources = false
+            this.$buefy.toast.open({
+              type: 'is-success',
+              message: 'Import complete'
+            })
           }
         })
       })
