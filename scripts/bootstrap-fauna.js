@@ -3,8 +3,7 @@ const faunadb = require('faunadb')
 const chalk = require('chalk')
 const insideNetlify = insideNetlifyBuildContext()
 const q = faunadb.query
-
-console.log(chalk.cyan('Creating FaunaDB Database...\n'))
+let client
 
 // Check for secret
 if (!process.env.FAUNADB_SECRET) {
@@ -15,35 +14,36 @@ if (!process.env.FAUNADB_SECRET) {
     process.exit(1)
   }
 } else {
-  createFaunaDB(process.env.FAUNADB_SECRET).then(() => {
-    console.log(chalk.green('Fauna Database schema has been created'))
-    console.log('Claim your fauna database with "netlify addons:auth fauna"')
-  })
+  createFaunaDB(process.env.FAUNADB_SECRET)
 }
 
 /**
  * Create our database
  */
 function createFaunaDB(key) {
-  const client = new faunadb.Client({
+  client = new faunadb.Client({
     secret: key
   })
 
-  return client.query(q.CreateCollection({ name: 'Resource' }))
-    .then(() => {
-      return client.query(
-        q.CreateIndex({
-          name: 'allResources',
-          source: q.Collection('Resource'),
-          terms: [{field: ['data']}]
-        }))
-    }).catch((e) => {
-      // Database already exists
-      if (e.requestResult.statusCode === 400 && e.message === 'instance not unique') {
-        console.log('Fauna already setup! Good to go')
-        console.log('Claim your fauna database with "netlify addons:auth fauna"')
-        throw e
-      }
+  console.log(chalk.cyan('Creating "Resource" collection'))
+  return client.query(q.CreateCollection({ name: 'Resource' })).then(() => {
+    // Create Index
+    return createIndexes()
+  }).catch((e) => {
+    console.log(chalk.red(e))
+    createIndexes()
+  })
+}
+
+function createIndexes () {
+  console.log(chalk.cyan('Creating "allResources" index'))
+  return client.query(
+    q.CreateIndex({
+      name: 'allResources',
+      source: q.Collection('Resource'),
+      terms: [{field: ['data']}]
+    })).catch((e) => {
+      console.log(chalk.red(e))
     })
 }
 
