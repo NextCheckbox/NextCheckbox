@@ -45,7 +45,7 @@ export default {
   },
 
   methods: {
-    test () {
+    test() {
       this.isNavOpen = !this.isNavOpen
       console.log('test')
     }

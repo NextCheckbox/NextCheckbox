@@ -67,10 +67,11 @@ export default {
       let data = {}
 
       keys.forEach((key) => {
-        let resource = json.Resource[key]
         let port = process.env.NODE_ENV === 'production' ? '' : ':9000'
+        let path = location.protocol + '//' + location.hostname + port + '/.netlify/functions/'
+        let resource = json.Resource[key]
 
-        fetch(location.protocol + '//' + location.hostname + port + '/.netlify/functions/createResource', {
+        fetch(path + 'createResource', {
           body: JSON.stringify(json.Resource[key]),
           method: 'POST'
         })

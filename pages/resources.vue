@@ -25,8 +25,9 @@ export default {
 
   mounted() {
     let port = process.env.NODE_ENV === 'production' ? '' : ':9000'
+    let path = location.protocol + '//' + location.hostname + port + '/.netlify/functions/'
 
-    fetch(location.protocol + '//' + location.hostname + port + '/.netlify/functions/getAllResources', {
+    fetch(path + 'getAllResources', {
       method: 'GET'
     })
       .then((res) => {
