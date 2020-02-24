@@ -1,28 +1,42 @@
 type Resource {
+  title: String!
+  isDeleted: Boolean
+  categories: [ResourceCategories!]!
+  tags: [String!]
+  content: String!
+
   address: String
   addressDetails: String
-  categories: [String]
-  content: String!
   coverImageUrl: String
   hideCoverImage: Boolean
   hours: String
-  id: ID
-  isDeleted: Boolean
-  latitude: Number
-  longitude: Number
+  latitude: Float
+  longitude: Float
   phone: String
   placeId: String
-  pov: {
-    heading: Number
-    pitch: Number
-    zoom: Number
-  }
-  povLatitude: Number
-  povLongitude: Number
+  povHeading: Float
+  povPitch: Float
+  povZoom: Float
+  povLatitude: Float
+  povLongitude: Float
   requiresReferral: Boolean
-  tags: [String!]
-  title: String!
   transit: String
   twitter: String
   websiteUrl: String
+}
+
+enum ResourceCategories {
+  EMPLOYMENT
+  HOUSING
+  HEALTH
+  COMMUNITY
+  FOOD
+  COUNSELING
+  CLOTHES
+  LEGAL
+  MISC
+}
+
+type Query {
+  allResources: [Resource!]
 }

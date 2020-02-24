@@ -1,0 +1,16 @@
+[build]
+  functions = "functions-build"
+  # This will be run the site build
+  command = "npm run build"
+  # This is the directory is publishing to netlify's CDN
+  publish = "build"
+
+[dev]
+  # Local dev command. A.k.a npm start
+  command = "nuxt"
+
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
