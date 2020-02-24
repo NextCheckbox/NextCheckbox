@@ -5,6 +5,7 @@ div
     p.subtitle Find local services and resources serving your community
 
   section.section
+    b-progress(v-if='isLoading')
     ResourceCard(v-for='(resource, key) in resources' :key='key' :resource='resource')
 </template>
 
@@ -18,6 +19,7 @@ export default {
   },
 
   data: () => ({
+    isLoading: true,
     resources: []
   }),
 
@@ -40,6 +42,9 @@ export default {
           type: 'is-danger',
           message: err.toString()
         })
+      })
+      .finally(() => {
+        this.isLoading = false
       })
   }
 }
