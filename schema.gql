@@ -1,15 +1,15 @@
 type Resource {
-  id: ID
-  author: User!
+  title: String!
+  isDeleted: Boolean
+  categories: [ResourceCategories!]!
+  tags: [String!]
+  content: String!
 
   address: String
   addressDetails: String
-  categories: [String]
-  content: String!
   coverImageUrl: String
   hideCoverImage: Boolean
   hours: String
-  isDeleted: Boolean
   latitude: Float
   longitude: Float
   phone: String
@@ -20,32 +20,23 @@ type Resource {
   povLatitude: Float
   povLongitude: Float
   requiresReferral: Boolean
-  tags: [String!]
-  title: String!
   transit: String
   twitter: String
   websiteUrl: String
 }
 
-type User {
-  id: ID
-  name: String!
-  resources: [Resource]
-  posts: [Post]
-}
-input UserInput {name: String!}
-
-type Post {
-  id: ID
-  author: User!
-  title: String!
-  published: String!
-  updated: String
-  content: String!
+enum ResourceCategories {
+  EMPLOYMENT
+  HOUSING
+  HEALTH
+  COMMUNITY
+  FOOD
+  COUNSELING
+  CLOTHES
+  LEGAL
+  MISC
 }
 
 type Query {
-  allResources: [Resource]
-  allUsers: [User]
-  allPosts: [Post]
+  allResources: [Resource!]
 }

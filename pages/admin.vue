@@ -20,6 +20,7 @@
               }
           b-field
             b-input(type='textarea' v-model='importResourceJSON')
+          b-progress(v-if='isImportingResources' show-value format='percent' :value='progress')
           b-button(type='is-primary' :loading='isImportingResources' @click='importResources') Import JSON
         .column.is-half-tablet()
 </template>
@@ -27,6 +28,7 @@
 <script>
 export default {
   data: () => ({
+    progress: 0,
     importResourceJSON: '',
     isImportingResources: false
   }),
@@ -39,6 +41,7 @@ export default {
       this.isImportingResources = true
       let json = {}
 
+      // Attempt to parse JSON
       try {
         json = JSON.parse(this.importResourceJSON)
       } catch (e) {
@@ -57,9 +60,13 @@ export default {
         })
       }
 
-      Object.keys(json.resource).forEach(key => {
+      // Create one document for every resource
+      this.progress = 0
+      const keys = Object.keys(json.resource)
+      keys.forEach(key => {
         console.log(key)
       })
+
       this.isImportingResources = false
     }
   }
