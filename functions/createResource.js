@@ -1,5 +1,6 @@
 require('dotenv').config({path: '../.env'})
 import faunadb from 'faunadb'
+import chalk from 'chalk'
 
 const q = faunadb.query
 const client = new faunadb.Client({
@@ -16,7 +17,7 @@ exports.handler = (event, context, callback) => {
 
   return client.query(q.Create(q.Collection('Resource'), resource))
     .then((response) => {
-      console.log("success", response)
+      console.log(chalk.green('createResource success'))
       return {
         statusCode: 200,
         headers: {
@@ -25,7 +26,7 @@ exports.handler = (event, context, callback) => {
         body: JSON.stringify(response)
       }
     }).catch((error) => {
-      console.log("error", error)
+      console.log(chalk.red('createResource error', error))
       return {
         statusCode: 400,
         body: JSON.stringify(error)
