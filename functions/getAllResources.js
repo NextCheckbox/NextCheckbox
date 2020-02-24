@@ -12,7 +12,7 @@ const client = new faunadb.Client({
  */
 exports.handler = (event, context, callback) => {
   return client
-    .query(q.Paginate(q.Match(q.Index('allResources'))))
+    .query(q.Paginate(q.Match(q.Index('allResources')), { size: 1000 }))
     .then((res) => {
       let data = res.data.map((ref) => {
         return q.Get(ref)
