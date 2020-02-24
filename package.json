@@ -7,11 +7,12 @@
   "scripts": {
     "dev": "npm-run-all --parallel nuxt:dev functions:dev",
     "nuxt:dev": "nuxt",
+    "nuxt:generate": "nuxt generate",
     "functions:dev": "netlify-lambda serve functions",
+    "functions:build": "netlify-lambda build functions",
     "functions:bootstrap": "node ./scripts/bootstrap-fauna.js",
-    "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "npm-run-all --parallel nuxt:generate functions:build",
     "test": "jest"
   },
   "dependencies": {
