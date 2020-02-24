@@ -17,15 +17,18 @@ exports.handler = (event, context, callback) => {
   return client.query(q.Create(q.Collection('Resource'), resource))
     .then((response) => {
       console.log("success", response)
-      return callback(null, {
+      return {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin" : "*"
+        },
         body: JSON.stringify(response)
-      })
+      }
     }).catch((error) => {
       console.log("error", error)
-      return callback(null, {
+      return {
         statusCode: 400,
         body: JSON.stringify(error)
-      })
+      }
     })
 }

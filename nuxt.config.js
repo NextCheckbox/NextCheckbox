@@ -39,8 +39,15 @@ export default {
    */
   modules: [
     // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy'
+    'nuxt-buefy',
+    '@nuxtjs/proxy'
   ],
+  proxy: {
+    '/.netlify': {
+      target: 'http://localhost:9000',
+      pathRewrite: {'^/.netlify/functions': ''},
+    },
+  },
   /*
    ** Build configuration
    */

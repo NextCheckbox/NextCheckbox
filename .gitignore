@@ -7,6 +7,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Our Project
+functions-build
+
 # Runtime data
 pids
 *.pid
