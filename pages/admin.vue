@@ -12,7 +12,7 @@
           pre.m-b-md.m-t-md
             code.
               {
-                "resource": {
+                "Resource": {
                   "id1": {...},
                   "id2": {...},
                   ...

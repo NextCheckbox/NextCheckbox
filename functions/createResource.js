@@ -40,9 +40,7 @@ exports.handler = async (event, context, callback) => {
           }
         })
         .catch((err) => {
-          console.log(
-            chalk.red('Error creating resource:', err, JSON.stringify(resource))
-          )
+          console.log(chalk.red('Error creating resource:', err, JSON.stringify(resource)))
           return {
             statusCode: 400,
             body: JSON.stringify(err)
