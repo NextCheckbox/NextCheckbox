@@ -6,14 +6,18 @@ div
 
   section.section
     .columns.is-multiline
-      Card.is-half-tablet.is-one-quarter-desktop(title='Community Resources' icon='store')
-        | coming soon
-      Card.is-half-tablet.is-one-quarter-desktop(title='Programs and Events' icon='calendar')
-        | coming soon
-      Card.is-half-tablet.is-one-quarter-desktop(title='Guides' icon='clipboard-check')
-        | coming soon
-      Card.is-half-tablet.is-one-quarter-desktop(title='News & Views' icon='newspaper')
-        | coming soon
+      nuxt-link.column.is-half-tablet.is-one-quarter-desktop(:to='{name: "resources"}')
+        Card(title='Community Resources' icon='store' style='width: 100%')
+          | Browse through all of our listed resources
+      .column.is-half-tablet.is-one-quarter-desktop.ghosted
+        Card(title='Programs and Events' icon='calendar')
+          | coming soon
+      .column.is-half-tablet.is-one-quarter-desktop.ghosted
+        Card(title='Guides' icon='clipboard-check')
+          | coming soon
+      .column.is-half-tablet.is-one-quarter-desktop.ghosted
+        Card(title='News & Views' icon='newspaper')
+          | coming soon
 </template>
 
 <script>
