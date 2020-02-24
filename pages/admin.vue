@@ -53,7 +53,7 @@ export default {
         return
       }
 
-      if (!json.resource) {
+      if (!json.Resource) {
         this.$buefy.toast.open({
           type: 'is-danger',
           message: 'JSON does not contain a root .resource'
@@ -62,25 +62,15 @@ export default {
 
       // Create one document for every resource
       this.progress = 0
-      const keys = Object.keys(json.resource)
+      const keys = Object.keys(json.Resource)
       let numWaiting = keys.length
+      let data = {}
 
       keys.forEach(key => {
-        let resource = json.resource[key]
-
-        // Remap pov to root properties
-        resource.povHeading = resource.pov.heading
-        resource.povPitch = resource.pov.pitch
-        resource.povZoom = resource.pov.zoom
-        delete resource.pov
-
-        // Transform categories to ENUM
-        resource.categories.forEach((category, i) => {
-          resource.categories[i] = category.toUpperCase()
-        })
+        let resource = json.Resource[key]
 
         fetch(location.protocol + '//' + location.hostname + ':9000' + '/.netlify/functions/createResource', {
-          body: JSON.stringify(json.resource[key]),
+          body: JSON.stringify(json.Resource[key]),
           method: 'POST'
         })
         .finally(() => {
